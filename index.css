@@ -1,0 +1,13 @@
+#editor{
+    height: calc(100% - 30px);
+    display: inline-block;
+}
+
+#pdfview{
+    height: calc(100% - 30px);
+    display: inline-block;
+}
+
+main{
+    font-size: 0;
+}

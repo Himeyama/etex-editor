@@ -1,0 +1,32 @@
+body
+    #title
+        background: var(--dark-background)
+        color: var(--dark-text)
+        #title-menu
+            #menubar
+                .dropDown
+                    button
+                        color: var(--dark-text)
+                        &:hover
+                            background: var(--dark-background-hover)
+                        &:focus
+                            background: var(--dark-background-hover)
+                    ul 
+                        background: var(--dark-background)
+                        li 
+                            hr
+                                color: var(--dark-text)
+                            a
+                                &:hover
+                                    background: var(--dark-background-hover)
+                    .dropdown-menu
+                        li .dropdown-item
+                            background: var(--dark-background)
+                            color: var(--dark-text)
+                            &:hover
+                                background: var(--dark-background-hover)
+        #window-controls
+            div::before
+                color: var(--dark-text)
+            div:hover
+                background: var(--dark-background-hover)    

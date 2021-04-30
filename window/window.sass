@@ -1,0 +1,104 @@
+body
+    overflow: hidden
+
+main
+    margin-top: 30px
+    overflow: auto
+    height: 100vh
+
+#title
+    position: fixed
+    top: 0
+    width: 100%
+    height: 30px
+    font-size: 0
+    z-index: 1000
+
+    #app-icon
+        -webkit-app-region: drag
+        display: inline-block
+        width: 35px
+        height: 100%
+    
+    #title-menu
+        display: inline-block
+        width: calc(100% - 173px)
+        height: 100%
+        vertical-align: top
+
+        #menubar
+            display: inline-block
+            height: 100%
+            vertical-align: top
+
+            .dropDown
+                button
+                    font-size: 13px
+                    padding: 4.25px 8px
+                    border-radius: unset
+                    &:focus
+                        box-shadow: unset
+                        border-radius: unset
+                ul
+                    font-size: 13px
+                    border-radius: unset
+                    border: unset
+                    width: 280px
+                    li
+                        hr
+                            margin: 8px 12px
+                        a
+                            padding: 2.5px 24px
+                            &:active
+                                color: unset
+                            .key
+                                text-align: right
+                            .item
+                                float: left
+
+        #window-title
+            font-size: 12px
+            display: inline-block
+            height: 100%
+            -webkit-app-region: drag
+            vertical-align: top
+            text-align: center
+            line-height: 30px
+            user-select: none
+
+    #window-controls
+        width: 138px
+        height: 100%
+        display: inline-block
+        font-family: codicon
+        text-align: center
+        vertical-align: top
+
+        div
+            height: 100%
+            width: 46px
+            display: inline-block
+            padding-top: 3px
+
+            &::before
+                font-size: 16px
+                
+
+        #window-minimize
+            &::before
+                content: "\eaba"
+
+        #window-max-restore
+            &.window-maximize
+                &::before
+                    content: "\eabb"
+
+            &::before
+                content: "\eab9"
+                
+        #window-close
+            &:hover
+                background: #e81123
+
+            &::before
+                content: "\eab8"

@@ -1,0 +1,18 @@
+{
+  "name": "chocho-editor",
+  "version": "1.0.0",
+  "description": "",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron .",
+    "sass": "sass window/window.sass:window/window.css && sass window/window.color.sass:window/window.color.css && sass window/window.color.dark.sass:window/window.color.dark.css"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "electron": "^12.0.5",
+    "iconv-lite": "^0.6.2",
+    "monaco-editor": "^0.23.0"
+  }
+}

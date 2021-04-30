@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>てふ</title>
+    <meta http-equiv="Content-Security-Policy" content="script-src 'self' 'unsafe-inline';" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="codicon/codicon.css">
+    <link rel="stylesheet" href="bootstrap-icons-1.4.1/bootstrap-icons.css">
+    <link rel="stylesheet" href="bootstrap-5.0.0/bootstrap.min.css">
+    <link rel="stylesheet" href="index.css">
+    <script src="bootstrap-5.0.0/bootstrap.bundle.min.js"></script>
+    <link rel="stylesheet" href="window/window.css">
+    <link rel="stylesheet" href="window/window.color.css">
+    <link rel="stylesheet" href="window/window.color.dark.css">
+</head>
+
+<body style="background: white;" class="dark">
+    <main>
+        <div id="editor" class="w-50"></div>
+        <iframe id="pdfview" class="w-50" name="pdf">
+        </iframe>
+        <script src="node_modules/monaco-editor/min/vs/loader.js"></script>
+        <script src="monaco-latex.js"></script>
+    </main>
+
+    <script src="window/window.js"></script>
+    <script src="window/menu.js"></script>
+    <script src="index.js"></script>
+</body>
+
+</html>

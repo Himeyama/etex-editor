@@ -1,0 +1,6 @@
+*.aux
+*.log
+*.pdf
+*.tex
+.sass-cache
+node_modules/
