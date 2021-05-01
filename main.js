@@ -3,7 +3,7 @@ const path = require("path")
 const {exec} = require("child_process")
 const fs = require("fs")
 const iconv = require("iconv-lite")
-
+const linux = process.platform == "linux"
 
 let filename
 let winFilename
@@ -41,21 +41,27 @@ function createWindow() {
         }
     })
 
-    exec("wsl -- wslpath -a %TEMP:\\=//%", (error, stdout, stderr) => {
-        if(error){
-            console.log(stderr)
-            return false
-        }
-        filename = `${stdout.trim()}/tmp.tex`
-    })
+    if(linux){
+        filename = `/tmp/tmp.tex`
+    }else{
+        exec("wsl -- wslpath -a %TEMP:\\=//%", (error, stdout, stderr) => {
+            if(error){
+                console.log(stderr)
+                return false
+            }
+            filename = `${stdout.trim()}/tmp.tex`
+        })
+    }
 
-    exec("echo %TEMP%", (error, stdout, stderr) => {
-        if(error){
-            console.log(stderr)
-            return false
-        }
-        winFilename = `${stdout.trim()}\\tmp.tex`
-    })
+    if(!linux){
+        exec("echo %TEMP%", (error, stdout, stderr) => {
+            if(error){
+                console.log(stderr)
+                return false
+            }
+            winFilename = `${stdout.trim()}\\tmp.tex`
+        })
+    }
 
     ipcMain.on("window-close", () => {
         win.close()
@@ -82,7 +88,7 @@ app.on("window-all-closed", () => {
 
 // 保存
 ipcMain.on("compile", (event, data) => {
-    event.sender.send("filename", winFilename)
+    event.sender.send("filename", (linux ? filename : winFilename))
     save(event, data)
 })
 
@@ -98,27 +104,35 @@ ipcMain.on("saveas", (event, data) => {
     })
     savefile.then(p => {
         if(!p["canceled"]){
-            winFilename = p["filePath"]
-            let efilename = winFilename.replace(/\\/g, "\\\\")
-            exec(`wsl -- wslpath -a ${efilename}`, (error, stdout, stderr) => {
-                filename = stdout.trim()
+            if(linux){
+                filename = p["filePath"]
                 save(event, data)
-            })
+            }else{
+                winFilename = p["filePath"]
+                let efilename = winFilename.replace(/\\/g, "\\\\")
+                exec(`wsl -- wslpath -a ${efilename}`, (error, stdout, stderr) => {
+                    filename = stdout.trim()
+                    save(event, data)
+                })
+            }
         }
     })
 })
 
 // 保存
 function save(event, data){
-    event.sender.send("filename", winFilename)
-    fs.writeFile(winFilename, data, (err) => {
+    event.sender.send("filename", linux ? filename : winFilename)
+    fs.writeFile(linux ? filename : winFilename, data, (err) => {
         if(err){
             console.log("SAVE ERROR!")
             throw err
         }
         event.sender.send("saved-tmptex")
     })
-    let cmd = `wsl -- PATH=$PATH:/usr/local/texlive/2021/bin/x86_64-linux ptex2pdf -l -ot -kanji=utf8 -halt-on-error -interaction=nonstopmode -file-line-error -output-directory ${path.dirname(filename)} ${filename}`
+    let cmd = `ptex2pdf -l -ot -kanji=utf8 -halt-on-error -interaction=nonstopmode -file-line-error -output-directory ${path.dirname(filename)} ${filename}`
+    if(!linux){
+        cmd = `wsl -- PATH=$PATH:/usr/local/texlive/2021/bin/x86_64-linux ${cmd}`
+    }
     exec(cmd, (error, stdout, stderr) => {
         if(error){
             console.log(stderr)
@@ -141,17 +155,20 @@ ipcMain.on("openfile", event => {
     })
     fileopen.then( p => {
         if(!p["canceled"]){
-            winFilename = p["filePaths"][0]
-            let efilename = winFilename.replace(/\\/g, "\\\\")
-            // console.log()
-            exec(`wsl -- wslpath -a ${efilename}`, (error, stdout, stderr) => {
-                filename = stdout.trim()
-            })
-            event.sender.send("filename", winFilename)
-            fs.readFile(winFilename, (err, data) => {
+            if(linux){
+                filename = p["filePaths"][0]
+            }else{
+                winFilename = p["filePaths"][0]
+                let efilename = winFilename.replace(/\\/g, "\\\\")
+                exec(`wsl -- wslpath -a ${efilename}`, (error, stdout, stderr) => {
+                    filename = stdout.trim()
+                })
+            }
+            event.sender.send("filename", linux ? filename : winFilename)
+            fs.readFile(linux ? filename : winFilename, (err, data) => {
                 if(err) throw err
                 event.sender.send("opentxt", data.toString())
-                event.sender.send("filename", winFilename)
+                event.sender.send("filename", linux ? filename : winFilename)
                 event.sender.send("compile-done")
             })
         }
