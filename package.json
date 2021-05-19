@@ -1,20 +1,30 @@
 {
-  "name": "chocho-editor",
-  "version": "1.0.0",
-  "description": "",
-  "main": "main.js",
-  "scripts": {
-    "start": "chcp 65001 && electron .",
-    "sass": "sass window/window.sass:window/window.css && sass window/window.color.sass:window/window.color.css && sass window/window.color.dark.sass:window/window.color.dark.css"
-  },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "devDependencies": {
-    "electron": "^12.0.5",
-    "electron-builder": "^22.10.5"
-  },
-  "dependencies": {
-    "monaco-editor": "^0.23.0"
-  }
+    "name": "chocho-editor",
+    "version": "1.0.0",
+    "description": "",
+    "main": "main.js",
+    "scripts": {
+        "start": "chcp 65001 && electron .",
+        "sass": "sass window/window.sass:window/window.css && sass window/window.color.sass:window/window.color.css && sass window/window.color.dark.sass:window/window.color.dark.css",
+        "build-win": "electron-builder --win --x64"
+    },
+    "keywords": [],
+    "author": "",
+    "license": "ISC",
+    "devDependencies": {
+        "electron": "^12.0.5",
+        "electron-builder": "^22.10.5"
+    },
+    "dependencies": {
+        "monaco-editor": "^0.23.0"
+    },
+    "build": {
+        "appId": "chocho.editor.app",
+        "win": {
+            "icon": "icon.ico",
+            "target": [
+                "nsis"
+            ]
+        }
+    }
 }
