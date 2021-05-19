@@ -4,15 +4,16 @@
   "description": "",
   "main": "main.js",
   "scripts": {
-    "start": "electron .",
+    "start": "chcp 65001 && electron .",
     "sass": "sass window/window.sass:window/window.css && sass window/window.color.sass:window/window.color.css && sass window/window.color.dark.sass:window/window.color.dark.css"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "dependencies": {
+  "devDependencies": {
     "electron": "^12.0.5",
     "iconv-lite": "^0.6.2",
-    "monaco-editor": "^0.23.0"
+    "monaco-editor": "^0.23.0",
+    "electron-builder": "^22.10.5"
   }
 }

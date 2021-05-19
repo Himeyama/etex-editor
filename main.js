@@ -133,6 +133,7 @@ function save(event, data){
     if(!linux){
         cmd = `wsl -- PATH=$PATH:/usr/local/texlive/2021/bin/x86_64-linux ${cmd}`
     }
+    console.log(cmd)
     exec(cmd, (error, stdout, stderr) => {
         if(error){
             console.log(stderr)
