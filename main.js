@@ -2,7 +2,6 @@ const { dialog, app, BrowserWindow, ipcMain, ipcRenderer } = require("electron")
 const path = require("path")
 const {exec} = require("child_process")
 const fs = require("fs")
-const iconv = require("iconv-lite")
 const linux = process.platform == "linux"
 
 let filename
