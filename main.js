@@ -84,6 +84,26 @@ app.on("window-all-closed", () => {
     }
 })
 
+ipcMain.on("ready", (event) => { // html 読み込み後
+    event.sender.send("log", process.argv)
+    if(process.argv.slice(-1)[0].match(/\.*.tex$/)){
+        event.sender.send("log", 1)
+        filename = process.argv.slice(-1)[0]
+        winFilename = filename
+        let efilename = winFilename.replace(/\\/g, "\\\\")
+        exec(`wsl -- wslpath -a ${efilename}`, (error, stdout, stderr) => {
+            filename = stdout.trim()
+        })
+        event.sender.send("filename", linux ? filename : winFilename)
+        fs.readFile(linux ? filename : winFilename, (err, data) => {
+            if(err) throw err
+            event.sender.send("opentxt", data.toString())
+            event.sender.send("filename", linux ? filename : winFilename)
+            event.sender.send("compile-done")
+        })
+    }
+})
+
 
 // 保存
 ipcMain.on("compile", (event, data) => {

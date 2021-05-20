@@ -17,6 +17,8 @@ require(["vs/editor/editor.main"], () => {
             "section", "subsection", "subsubsection",
             "screen", "itembox",
             "eqnarray", "eqnarray*",
+            "table", "tabular",
+            "itemize", "enumerate"
         ],
         cles: [
             "jsarticle", "jarticle", "article",

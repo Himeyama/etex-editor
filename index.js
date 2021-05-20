@@ -46,7 +46,12 @@ window.electron.on("compile-error", (error) => {
 
 window.electron.on("opentxt", data => {
     untitled = false
-    editor.setValue(data)
+    const edit_setvalue = setInterval(() => {
+        if(typeof editor.setValue != "undefined"){// 定義されているとき
+            editor.setValue(data)
+            clearInterval(edit_setvalue)
+        }
+    }, 1)
 })
 
 window.electron.on("filename", data => {
@@ -54,3 +59,8 @@ window.electron.on("filename", data => {
     windowTitle.innerText = `${filename} - ${title}`
 })
 
+window.electron.on("log", data => {
+    console.log(data)
+})
+
+window.electron.ready()

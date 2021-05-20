@@ -12,6 +12,8 @@ contextBridge.exposeInMainWorld(
 
         openfile: () => ipcRenderer.send("openfile"),
 
+        ready: () => ipcRenderer.send("ready"),
+
         on: (channel, func) => ipcRenderer.on(channel, (event, ...args) => func(...args)),
         func1: () => ipcRenderer.send("func1"),
         func2: (arg) => ipcRenderer.send("func2", arg)
