@@ -1,4 +1,4 @@
-# Chocho Editor
+# Chocho Editor 🦋
 
 LaTeX のエディター
 
