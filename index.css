@@ -11,3 +11,29 @@
 main{
     font-size: 0;
 }
+
+#editor{
+    width: 50%;
+}
+
+#separate{
+    width: 30px;
+    height: calc(100% - 30px);
+    display: inline-block;
+    transition-timing-function: cubic-bezier(0.6, -0.28, 0.74, 0.05);
+    transition: .8s;
+    cursor: ew-resize;
+    background: #525659;
+}
+
+#pdfview{
+    background: #323639;
+}
+
+#separate:hover{
+    background-color: #4CAF50;
+}
+
+#pdfview{
+    width: calc(50% - 30px);
+}

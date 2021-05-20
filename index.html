@@ -14,14 +14,15 @@
     <link rel="stylesheet" href="window/window.css">
     <link rel="stylesheet" href="window/window.color.css">
     <link rel="stylesheet" href="window/window.color.dark.css">
+    <style id="jstyle"></style>
 </head>
 
 <body style="background: white;" class="dark">
     
     <main>
-        <div id="editor" class="w-50"></div>
-        <iframe id="pdfview" class="w-50" name="pdf">
-        </iframe>
+        <div id="editor"></div>
+        <div id="separate"></div>
+        <iframe id="pdfview" name="pdf"></iframe>
         <script src="node_modules/monaco-editor/min/vs/loader.js"></script>
         <script src="monaco-latex.js"></script>
     </main>

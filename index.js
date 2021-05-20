@@ -59,8 +59,38 @@ window.electron.on("filename", data => {
     windowTitle.innerText = `${filename} - ${title}`
 })
 
+// セパレートをクリックしたとき
+function resep(x){
+    let edit = document.getElementById("editor")
+    let sepa = document.getElementById("separate")
+    let pv = document.getElementById("pdfview")
+    let css = document.getElementById("jstyle")
+    edit.style.width = `${x}px`
+    css.innerHTML = `#pdfview{width: calc(100% - ${x + 30}px)}`
+}
+
+let sep = document.getElementById("separate")
+let smove = false
+sep.addEventListener("mousedown", () => {
+    smove = true
+    console.log(true)
+})
+document.body.addEventListener("mousemove", (e) => {
+    if(smove){
+        console.log(e.pageX)
+        resep(e.pageX)
+    }
+})
+document.body.addEventListener("mouseup", () => {
+    if(smove){
+        smove = false
+        console.log("マウス上げ")
+    }
+    
+})
 window.electron.on("log", data => {
     console.log(data)
 })
+
 
 window.electron.ready()
