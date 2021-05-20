@@ -10,15 +10,20 @@ LaTeX のエディター
 ### 依存
 WSL2 + texlive のインストールが必要。
 
+### インストール
+
+https://github.com/Himeyama/etex-editor/releases
+
+ここから、インストーラーをダウンロードしインストール。
+
 ### 対応
 
 - Windows 10
 - Ubuntu (ビルドは未)
 
-### ビルドとインストール
+### ビルド
 ```sh
 npm run build-win
 ```
 
 `dist/chocho-editor x.x.x.exe` をクリックしインストール
-
