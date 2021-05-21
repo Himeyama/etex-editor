@@ -75,13 +75,13 @@ sep.addEventListener("mousedown", () => {
     smove = true
     console.log(true)
 })
-document.body.addEventListener("mousemove", (e) => {
+window.addEventListener("mousemove", (e) => {
     if(smove){
         console.log(e.pageX)
         resep(e.pageX)
     }
 })
-document.body.addEventListener("mouseup", () => {
+window.addEventListener("mouseup", () => {
     if(smove){
         smove = false
         console.log("マウス上げ")
