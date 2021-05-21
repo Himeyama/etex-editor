@@ -13,7 +13,7 @@ main{
 }
 
 #editor{
-    width: 50%;
+    width: 780px;
 }
 
 #separate{
@@ -35,5 +35,5 @@ main{
 }
 
 #pdfview{
-    width: calc(50% - 30px);
+    width: calc(100% - 810px);
 }
